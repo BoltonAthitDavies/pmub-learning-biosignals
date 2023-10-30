@@ -167,6 +167,7 @@ def train(
             augment_seq=True,
         )
         # Train
+        logger.info("athit:{}".format(type(aug_train_y)))
         train_outs = model.train(aug_minibatch_fn)
 
         # Create minibatches for validation

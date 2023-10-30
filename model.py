@@ -11,18 +11,28 @@ from logger import get_logger
 
 def simple_model():
     model = nn.Sequential(
-        nn.Conv1d(in_channels=1, out_channels=32, kernel_size=50, stride=6, bias=False),
-        nn.BatchNorm1d(num_features=32, eps=0.001, momentum=0.01),
+        nn.Conv1d(in_channels=1, out_channels=128, kernel_size=50, stride=25, bias=False, padding=2),
+        nn.BatchNorm1d(num_features=128, eps=0.001, momentum=0.01),
         nn.ReLU(inplace=True),
-        nn.MaxPool1d(kernel_size=8, stride=8),
+        nn.MaxPool1d(kernel_size=8, stride=8, padding=2),
         nn.Dropout(p=0.5),
-        nn.Conv1d(in_channels=32, out_channels=64, kernel_size=8, stride=1, bias=False),
-        nn.BatchNorm1d(num_features=64, eps=0.001, momentum=0.01),
+        
+        nn.Conv1d(in_channels=128, out_channels=128, kernel_size=8, stride=1, bias=False, padding=2),
+        nn.BatchNorm1d(num_features=128, eps=0.001, momentum=0.01),
         nn.ReLU(inplace=True),
-        nn.MaxPool1d(kernel_size=8, stride=8),
+        
+        nn.Conv1d(in_channels=128, out_channels=128, kernel_size=8, stride=1, bias=False, padding=2),
+        nn.BatchNorm1d(num_features=128, eps=0.001, momentum=0.01),
+        nn.ReLU(inplace=True),
+        
+        nn.Conv1d(in_channels=128, out_channels=128, kernel_size=8, stride=1, bias=False, padding=2),
+        nn.BatchNorm1d(num_features=128, eps=0.001, momentum=0.01),
+        nn.ReLU(inplace=True),
+        
+        nn.MaxPool1d(kernel_size=4, stride=4, padding=2),
         nn.Dropout(p=0.5),
         nn.Flatten(),
-        nn.Linear(in_features=384, out_features=5, bias=False)
+        nn.Linear(in_features=256, out_features=5, bias=False)
     )
     return model
 
